@@ -1,0 +1,32 @@
+{
+    "name": "jundayw/laravel-payment",
+    "description": "laravel payment provider",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jundayw",
+            "email": "jundayw@126.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "alipaysdk/easysdk": "^2.2",
+        "wechatpay/wechatpay": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jundayw\\LaravelPayment\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jundayw\\LaravelPayment\\PaymentServiceProvider"
+            ],
+            "aliases": {
+                "Payment": "Jundayw\\LaravelPayment\\Facades\\Payment"
+            }
+        }
+    }
+}
