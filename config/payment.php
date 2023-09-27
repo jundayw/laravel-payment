@@ -2,7 +2,8 @@
 
 return [
     'alipay' => [
-        'default' => [
+        'default' => '202100410260****',
+        '202100410260****' => [
             // 必填-支付宝分配的 app_id
             'app_id' => env('ALIPAY_APP_ID', '202100410260****'),
             // 必填-应用私钥 路径
@@ -22,7 +23,8 @@ return [
         ],
     ],
     'wechat' => [
-        'default' => [
+        'default' => '190000****',
+        '190000****' => [
             // 必填-商户号
             'mch_id' => env('WECHAT_MCH_ID', '190000****'),
             'api_v2_key' => env('WECHAT_API_V2_KEY', ''),

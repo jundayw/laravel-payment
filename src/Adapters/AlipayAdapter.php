@@ -17,7 +17,7 @@ class AlipayAdapter extends PaymentAdapter
         $options->protocol    = 'https';
         $options->gatewayHost = 'openapi.alipay.com';
         // $options->gatewayHost = 'openapi-sandbox.dl.alipaydev.com';
-        $options->signType    = 'RSA2';
+        $options->signType = 'RSA2';
 
         $options->appId = $this->config['app_id'];
 
@@ -245,6 +245,65 @@ class AlipayAdapter extends PaymentAdapter
             ->payment()
             ->common()
             ->close($request->getOutTradeNo());
+        if ($response == '10000') {
+            return $response->toMap();
+        }
+        throw new Exception($response->subMsg);
+    }
+
+    /**
+     * 交易退款
+     *
+     * @param PaymentRequest $request
+     * @param array $mergePayload
+     * @return array
+     * @throws Exception
+     */
+    public function refund(PaymentRequest $request, array $mergePayload = []): array
+    {
+        $response = $this->getProvider()
+            ->payment()
+            ->common()
+            ->refund($request->getOutTradeNo(), $request->getRefundAmount());
+        if ($response == '10000') {
+            return $response->toMap();
+        }
+        throw new Exception($response->subMsg);
+    }
+
+    /**
+     * 交易退款查询
+     *
+     * @param PaymentRequest $request
+     * @return array
+     * @throws Exception
+     */
+    public function refundQuery(PaymentRequest $request): array
+    {
+        $response = $this->getProvider()
+            ->payment()
+            ->common()
+            ->queryRefund($request->getOutTradeNo(), $request->getOutRefundNo());
+        if ($response == '10000') {
+            return $response->toMap();
+        }
+        throw new Exception($response->subMsg);
+    }
+
+    /**
+     * 撤销交易
+     *
+     * @param PaymentRequest $request
+     * @param array $mergePayload
+     * @return array
+     * @throws Exception
+     */
+    public function cancel(PaymentRequest $request, array $mergePayload = []): array
+    {
+        $response = $this->getProvider()
+            ->payment()
+            ->common()
+            ->cancel($request->getOutTradeNo());
         if ($response == '10000') {
             return $response->toMap();
         }

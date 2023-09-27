@@ -57,11 +57,12 @@ class PaymentManager implements Factory
     /**
      * Get the default provider name.
      *
+     * @param string $driver
      * @return string
      */
-    public function getDefaultProvider(): string
+    public function getDefaultProvider(string $driver): string
     {
-        return 'default';
+        return $this->config[$driver]['default'];
     }
 
     /**
@@ -85,7 +86,7 @@ class PaymentManager implements Factory
             throw new InvalidArgumentException("Payment Driver [$driver] not supported.");
         }
 
-        $provider = $provider ?: $this->getDefaultProvider();
+        $provider = $provider ?: $this->getDefaultProvider($driver);
 
         if (!array_key_exists($provider, $this->config[$driver])) {
             throw new InvalidArgumentException("Payment Provider [$provider] not supported.");

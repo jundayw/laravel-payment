@@ -151,12 +151,14 @@ class WechatAdapter extends PaymentAdapter
     }
 
     /**
+     * 付款码
+     *
      * @param PaymentRequest $request
      * @param array $mergePayload
      * @return array
      * @throws Exception
      */
-    public function pos(PaymentRequest $request, array $mergePayload = []): array
+    protected function pos(PaymentRequest $request, array $mergePayload = []): array
     {
         $data         = [
             'appid' => $this->getConfig('app_id'),
@@ -190,7 +192,7 @@ class WechatAdapter extends PaymentAdapter
      * @return array
      * @throws Exception
      */
-    public function scan(PaymentRequest $request, array $mergePayload = []): array
+    protected function scan(PaymentRequest $request, array $mergePayload = []): array
     {
         $data   = [
             'json' => [
@@ -223,7 +225,7 @@ class WechatAdapter extends PaymentAdapter
      * @return array
      * @throws Exception
      */
-    public function mp(PaymentRequest $request, array $mergePayload = []): array
+    protected function mp(PaymentRequest $request, array $mergePayload = []): array
     {
         $data   = [
             'json' => [
@@ -368,6 +370,14 @@ class WechatAdapter extends PaymentAdapter
         return json_decode($result->getBody()->getContents(), true);
     }
 
+    /**
+     * 查询
+     *
+     * @param PaymentRequest $request
+     * @param array $mergePayload
+     * @return array
+     * @throws Exception
+     */
     public function query(PaymentRequest $request, array $mergePayload = []): array
     {
         try {
@@ -383,6 +393,14 @@ class WechatAdapter extends PaymentAdapter
         }
     }
 
+    /**
+     * 关闭
+     *
+     * @param PaymentRequest $request
+     * @param array $mergePayload
+     * @return array
+     * @throws Exception
+     */
     public function close(PaymentRequest $request, array $mergePayload = []): array
     {
         try {
@@ -403,6 +421,14 @@ class WechatAdapter extends PaymentAdapter
         }
     }
 
+    /**
+     * 交易退款
+     *
+     * @param PaymentRequest $request
+     * @param array $mergePayload
+     * @return array
+     * @throws Exception
+     */
     public function refund(PaymentRequest $request, array $mergePayload = []): array
     {
         try {
@@ -430,6 +456,13 @@ class WechatAdapter extends PaymentAdapter
         }
     }
 
+    /**
+     * 交易退款查询
+     *
+     * @param PaymentRequest $request
+     * @return array
+     * @throws Exception
+     */
     public function refundQuery(PaymentRequest $request): array
     {
         try {
@@ -445,11 +478,25 @@ class WechatAdapter extends PaymentAdapter
         }
     }
 
-    public function cancel(PaymentRequest $request, array $mergePayload = [])
+    /**
+     * 撤销交易
+     *
+     * @param PaymentRequest $request
+     * @param array $mergePayload
+     * @return array
+     * @throws Exception
+     */
+    public function cancel(PaymentRequest $request, array $mergePayload = []): array
     {
         throw new Exception('微信不支持此功能');
     }
 
+    /**
+     * 通知验证
+     *
+     * @param array $data
+     * @return array|bool
+     */
     public function notify(array $data = []): array|bool
     {
         $inWechatpaySignature      = $data['Wechatpay-Signature'];
@@ -481,6 +528,13 @@ class WechatAdapter extends PaymentAdapter
         return false;
     }
 
+    /**
+     * 通知响应
+     *
+     * @param string $code
+     * @param string $message
+     * @return string
+     */
     public function notifyResponse(string $code = 'SUCCESS', string $message = ''): string
     {
         return json_encode([
