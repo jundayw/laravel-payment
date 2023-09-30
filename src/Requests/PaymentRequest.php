@@ -13,7 +13,6 @@ class PaymentRequest implements Request, Arrayable
     public int|float $amount = 0.0;
     public string $outRefundNo = '';
     public int|float $refundAmount = 0.0;
-    public int|float $totalAmount = 0.0;
     public array $attach = [];
     public string $notifyUrl = '';
     public string $returnUrl = '';
@@ -118,25 +117,6 @@ class PaymentRequest implements Request, Arrayable
     public function setRefundAmount(float|int $refundAmount): PaymentRequest
     {
         $this->refundAmount = $refundAmount;
-        return $this;
-    }
-
-    /**
-     * @param int|float $precision
-     * @return float|int
-     */
-    public function getTotalAmount(int|float $precision = 1): float|int
-    {
-        return $this->totalAmount * $precision;
-    }
-
-    /**
-     * @param float|int $totalAmount
-     * @return PaymentRequest
-     */
-    public function setTotalAmount(float|int $totalAmount): PaymentRequest
-    {
-        $this->totalAmount = $totalAmount;
         return $this;
     }
 

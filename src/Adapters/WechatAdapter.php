@@ -434,12 +434,12 @@ class WechatAdapter extends PaymentAdapter
         try {
             $data   = [
                 'json' => [
-                    "out_trade_no" => $request->getTradeCode(),                   // 原支付交易对应的商户订单号，与transaction_id二选一
+                    "out_trade_no" => $request->getOutTradeNo(),                   // 原支付交易对应的商户订单号，与transaction_id二选一
                     "out_refund_no" => $request->getOutRefundNo(),                // 商户系统内部的退款单号
                     "notify_url" => $this->getConfig('notify_url'),               // 商户系统内部的退款单号
                     "amount" => [
                         "refund" => intval($request->getRefundAmount(100)), // 退款金额
-                        "total" => intval($request->getTotalAmount(100)),   // 原支付交易的订单总金额
+                        "total" => intval($request->getAmount(100)),   // 原支付交易的订单总金额
                         "currency" => "CNY",
                     ],
                 ],
