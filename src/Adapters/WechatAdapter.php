@@ -519,11 +519,14 @@ class WechatAdapter extends PaymentAdapter
                 'ciphertext' => $ciphertext,
                 'nonce' => $nonce,
                 'associated_data' => $aad,
+                'original_type' => $original_type,
             ]] = $inBodyArray;
             // 加密文本消息解密
             $inBodyResource = AesGcm::decrypt($ciphertext, $this->getConfig('api_v3_key'), $nonce, $aad);
             // 把解密后的文本转换为PHP Array数组
-            return json_decode($inBodyResource, true);
+            $inBodyArray['original_type'] = $original_type;
+            $inBodyArray[$original_type]  = json_decode($inBodyResource, true);
+            return $inBodyArray;
         }
         return false;
     }
