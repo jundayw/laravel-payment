@@ -11,6 +11,7 @@ use Jundayw\LaravelPayment\PaymentManager;
 /**
  * @method static PaymentAdapter provider($driver, string $provider = null)
  * @method static PaymentManager extend($driver, Closure $callback)
+ * @method static string getDefaultProvider(string $driver)
  */
 class Payment extends Facade
 {

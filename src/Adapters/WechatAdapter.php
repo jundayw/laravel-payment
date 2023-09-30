@@ -415,7 +415,7 @@ class WechatAdapter extends PaymentAdapter
             if ($result->getStatusCode() != 204) {
                 throw new Exception('请求微信关闭订单异常');
             }
-            return json_decode($result->getBody()->getContents(), true);
+            return [];
         } catch (Exception $exception) {
             throw new Exception($exception->getMessage());
         }
