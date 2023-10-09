@@ -122,8 +122,8 @@ class AlipayAdapter extends PaymentAdapter
                 $request->getAmount(),
                 $request->getAuthCode()
             );
-        if ($response == '10000') {
-            return $response->toMap();
+        if ($response->code == '10000') {
+            return json_decode($response->httpBody, true);
         }
         throw new Exception($response->subMsg);
     }
@@ -149,7 +149,7 @@ class AlipayAdapter extends PaymentAdapter
                 $request->getAmount()
             );
         if ($response->code == '10000') {
-            return $response->toMap();
+            return json_decode($response->httpBody, true);
         }
         throw new Exception($response->subMsg);
     }
@@ -175,8 +175,8 @@ class AlipayAdapter extends PaymentAdapter
                 $request->getAmount(),
                 $request->getBuyerId()
             );
-        if ($response == '10000') {
-            return $response->toMap();
+        if ($response->code == '10000') {
+            return json_decode($response->httpBody, true);
         }
         throw new Exception($response->subMsg);
     }
@@ -205,8 +205,8 @@ class AlipayAdapter extends PaymentAdapter
                     'identity_type' => 'ALIPAY_USER_ID',
                 ],
             ]);
-        if ($response == '10000') {
-            return $response->toMap();
+        if ($response->code == '10000') {
+            return json_decode($response->httpBody, true);
         }
         throw new Exception($response->subMsg);
     }
@@ -225,8 +225,8 @@ class AlipayAdapter extends PaymentAdapter
             ->payment()
             ->common()
             ->query($request->getOutTradeNo());
-        if ($response == '10000') {
-            return $response->toMap();
+        if ($response->code == '10000') {
+            return json_decode($response->httpBody, true);
         }
         throw new Exception($response->subMsg);
     }
@@ -245,8 +245,8 @@ class AlipayAdapter extends PaymentAdapter
             ->payment()
             ->common()
             ->close($request->getOutTradeNo());
-        if ($response == '10000') {
-            return $response->toMap();
+        if ($response->code == '10000') {
+            return json_decode($response->httpBody, true);
         }
         throw new Exception($response->subMsg);
     }
@@ -265,8 +265,8 @@ class AlipayAdapter extends PaymentAdapter
             ->payment()
             ->common()
             ->refund($request->getOutTradeNo(), $request->getRefundAmount());
-        if ($response == '10000') {
-            return $response->toMap();
+        if ($response->code == '10000') {
+            return json_decode($response->httpBody, true);
         }
         throw new Exception($response->subMsg);
     }
@@ -284,8 +284,8 @@ class AlipayAdapter extends PaymentAdapter
             ->payment()
             ->common()
             ->queryRefund($request->getOutTradeNo(), $request->getOutRefundNo());
-        if ($response == '10000') {
-            return $response->toMap();
+        if ($response->code == '10000') {
+            return json_decode($response->httpBody, true);
         }
         throw new Exception($response->subMsg);
     }
@@ -304,8 +304,8 @@ class AlipayAdapter extends PaymentAdapter
             ->payment()
             ->common()
             ->cancel($request->getOutTradeNo());
-        if ($response == '10000') {
-            return $response->toMap();
+        if ($response->code == '10000') {
+            return json_decode($response->httpBody, true);
         }
         throw new Exception($response->subMsg);
     }
