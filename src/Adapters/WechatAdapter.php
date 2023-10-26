@@ -166,7 +166,7 @@ class WechatAdapter extends PaymentAdapter
             'nonce_str' => md5(uniqid(microtime(true), true)),
             'body' => $request->getSubject(),
             'out_trade_no' => $request->getOutTradeNo(),
-            "time_expire" => $request->getTimeExpire()->toRfc3339String(),
+            "time_expire" => $request->getTimeExpire()->format('YmdHis'),
             "attach" => $request->getAttach(),
             'total_fee' => intval($request->getAmount(100)),
             'spbill_create_ip' => $request->getClientIp(),
