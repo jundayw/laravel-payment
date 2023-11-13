@@ -131,7 +131,7 @@ class WechatAdapter extends PaymentAdapter
             "appId" => $this->getConfig('app_id'),
             "timeStamp" => (string)time(),
             "nonceStr" => md5(uniqid(microtime(true), true)),
-            "package" => "prepay_id={$result["prepay_id"]}",
+            "prepayid" => $result["prepay_id"],
         ];
         $payDataStr = "";
         foreach ($payData as $key => $value) {
@@ -146,6 +146,7 @@ class WechatAdapter extends PaymentAdapter
             OPENSSL_ALGO_SHA256) ? base64_encode($signature) : '';
         $payData["sign"]      = $sign;
         $payData["partnerid"] = $this->getConfig('mch_id');
+        $payData["package"]   = 'Sign=WXPay';
         return $payData;
     }
 
