@@ -125,8 +125,7 @@ class WechatAdapter extends PaymentAdapter
         if ($result->getStatusCode() != 200) {
             throw new Exception('请求微信APP预下单异常');
         }
-        $result = $result->getBody()->getContents();
-
+        
         $result     = json_decode($result->getBody()->getContents(), true);
         $payData    = [
             "appId" => $this->getConfig('app_id'),
