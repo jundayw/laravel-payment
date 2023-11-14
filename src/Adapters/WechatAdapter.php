@@ -254,7 +254,7 @@ class WechatAdapter extends PaymentAdapter
 
         $result     = json_decode($result->getBody()->getContents(), true);
         $payData    = [
-            "appId" => $this->getConfig('app_id'),
+            "appId" => $this->getConfig('mp_app_id'),
             "timeStamp" => (string)time(),
             "nonceStr" => md5(uniqid(microtime(true), true)),
             "package" => "prepay_id={$result["prepay_id"]}",
@@ -312,7 +312,7 @@ class WechatAdapter extends PaymentAdapter
 
         $result     = json_decode($result->getBody()->getContents(), true);
         $payData    = [
-            "appId" => $this->getConfig('app_id'),
+            "appId" => $this->getConfig('mini_app_id'),
             "timeStamp" => (string)time(),
             "nonceStr" => md5(uniqid(microtime(true), true)),
             "package" => "prepay_id={$result["prepay_id"]}",
